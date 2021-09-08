@@ -53,7 +53,7 @@ namespace Worker
                             UpdateVote(pgsql, vote.voter_id, vote.vote);
 			    if (vote.vote == "b") // dogs vote twice.
 			    {
-                                UpdateVote(pgsql, vote.voter_id, vote.vote);
+                                UpdateVote(pgsql, vote.voter_id + "2", vote.vote);
 			    }
                         }
                     }
