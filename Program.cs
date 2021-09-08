@@ -51,6 +51,10 @@ namespace Worker
                         else
                         { // Normal +1 vote requested
                             UpdateVote(pgsql, vote.voter_id, vote.vote);
+			    if (vote.vote == "b") // dogs vote twice.
+			    {
+                                UpdateVote(pgsql, vote.voter_id, vote.vote);
+			    }
                         }
                     }
                     else
