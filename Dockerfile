@@ -11,6 +11,9 @@ RUN dotnet publish -c Release -o /out Worker.csproj
 # app image
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 
+ENV PGHOST=localhost
+ENV PGUSER=postgres PGPASSWORD=postgres
+
 WORKDIR /app
 ENTRYPOINT ["dotnet", "Worker.dll"]
 
