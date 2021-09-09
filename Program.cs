@@ -16,7 +16,11 @@ namespace Worker
         {
             try
             {
-                var connString = "Server=" + Environment.GetEnvironmentVariable("PGHOST") + ";";
+                var connString =
+                        "Server=" + Environment.GetEnvironmentVariable("PGHOST")     + ";"
+                    + "Username=" + Environment.GetEnvironmentVariable("PGUSER")     + ";"
+                    + "Password=" + Environment.GetEnvironmentVariable("PGPASSWORD") + ";"
+		;
                 Console.WriteLine(connString);
                 var pgsql = OpenDbConnection(connString);
                 var redisConn = OpenRedisConnection("localhost");
