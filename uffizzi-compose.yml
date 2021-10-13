@@ -1,0 +1,45 @@
+services:
+  redis:
+    image: redis:latest
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: ${VOTE_APP_POSTGRES.USER}
+      POSTGRES_PASSWORD: ${VOTE_APP_POSTGRES.PASSWORD}
+
+  nginx:
+    image: nginx:latest
+    configs:
+      - source: vote.conf
+        target: /etc/nginx/conf.d
+
+  worker:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-worker
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+
+  vote:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-vote
+      dockerfile: Dockerfile
+
+  result:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-result
+      dockerfile: Dockerfile
+
+continuous-preview:
+  deploy_preview_when_pull_request_is_opened: false
+  delete_preview_when_pull_request_is_closed: true
+  deploy_preview_for_new_image_tags: true
+  delete_preview_after: 24h
+  share_to_github: true
+
+ingress:
+  service: nginx
+  port: 8080
