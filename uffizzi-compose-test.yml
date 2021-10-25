@@ -38,8 +38,11 @@ services:
       dockerfile: Dockerfile
 
 continuous_preview:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
+  deploy_preview_when_pull_request_is_opened: false
+  delete_preview_when_pull_request_is_closed: false
+  deploy_preview_for_image_tag_PR_#-branchname: true
+  delete_preview_when_pull_request_is_closed: false
+  delete_preview_in_x_hours: 24
   share_to_github: true
 
 ingress:
