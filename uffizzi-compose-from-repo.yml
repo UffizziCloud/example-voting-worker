@@ -4,9 +4,8 @@ services:
 
   postgres:
     image: postgres:9.6
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - postgres.env
     deploy:
       resources:
         limits:
