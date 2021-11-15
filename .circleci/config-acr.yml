@@ -12,13 +12,6 @@ workflows:
           repo: example-voting-worker
           tag: $CIRCLE_TAG
 
-workflows:
-  my-workflow:
-    jobs:
-      - build:
-          context:
-            - adams-docker-hub
-
 jobs:
  build:
    machine: true
@@ -26,11 +19,11 @@ jobs:
    steps:
      - checkout
 
-     # Login to Docker Hub so we can push later.
-     - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
+     # Login to Azure so we can push later.
+     - run: azure login --username $AZURE_USERNAME --password $AZURE_PASSWORD
 
      # build the application image
-     - run: docker build -t uffizzicloud/example-worker:$CIRCLE_BRANCH .
+     - run: docker build -t uffizziqa/example-worker:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push uffizzicloud/example-worker:$CIRCLE_BRANCH
+     - run: docker push uffizziqa/example-worker:$CIRCLE_BRANCH
