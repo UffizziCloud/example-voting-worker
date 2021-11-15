@@ -1,5 +1,17 @@
 version: 2.1
 
+orbs:
+  azure-acr: circleci/azure-acr@0.2.0
+version: 2.1
+workflows:
+  build-and-publish-docker-image:
+    jobs:
+      - azure-acr/build-and-push-image:
+          login-server-name: uffizziqa.azurecr.io
+          registry-name: uffizziqa
+          repo: example-voting-worker
+          tag: $CIRCLE_TAG
+
 workflows:
   my-workflow:
     jobs:
