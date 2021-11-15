@@ -1,0 +1,24 @@
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context:
+            - adams-docker-hub
+
+jobs:
+ build:
+   machine: true
+
+   steps:
+     - checkout
+
+     # Login to Docker Hub so we can push later.
+     - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
+
+     # build the application image
+     - run: docker build -t uffizzicloud/example-worker:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push uffizzicloud/example-worker:$CIRCLE_BRANCH
