@@ -19,9 +19,6 @@ jobs:
    steps:
      - checkout
 
-     # Login to Azure so we can push later.
-     - run: azure login --username $AZURE_USERNAME --password $AZURE_PASSWORD
-
      # build the application image
      - run: docker build -t uffizziqa/example-worker:$CIRCLE_BRANCH .
 
