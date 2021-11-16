@@ -1,11 +1,17 @@
-version: 2.1
+orbs:
+  azure-acr: circleci/azure-acr@0.2.0
+version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
 workflows:
-  my-workflow:
+  build-deploy:
     jobs:
-      - build:
-          context:
-            - adams-docker-hub
+      - azure-acr/build-and-push-image:
+          dockerfile: # defaults to `Dockerfile`
+          path: # Defaults to working directory
+          login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
+          registry-name: uffizziqa
+          repo: example-worker
+          tag: $CIRCLE_BRANCH
 
 jobs:
  build:
@@ -14,11 +20,8 @@ jobs:
    steps:
      - checkout
 
-     # Login to Docker Hub so we can push later.
-     - run: docker login --username $DOCKER_USER --password $DOCKER_PASS
-
      # build the application image
-     - run: docker build -t uffizzicloud/example-worker:$CIRCLE_BRANCH .
+     - run: docker build -t uffizziqa/example-worker:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push uffizzicloud/example-worker:$CIRCLE_BRANCH
+     - run: docker push uffizziqa/example-worker:$CIRCLE_BRANCH
