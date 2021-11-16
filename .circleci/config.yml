@@ -12,16 +12,3 @@ workflows:
           registry-name: uffizziqa
           repo: example-worker
           tag: $CIRCLE_BRANCH
-
-jobs:
- build:
-   machine: true
-
-   steps:
-     - checkout
-
-     # build the application image
-     - run: docker build -t uffizziqa/example-worker:$CIRCLE_BRANCH .
-
-     # deploy the image
-     - run: docker push uffizziqa/example-worker:$CIRCLE_BRANCH
