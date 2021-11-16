@@ -10,7 +10,8 @@ workflows:
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
-          repo: https://uffizziqa.azurecr.io
+          repo: example-worker
+          tag: $CIRCLE_BRANCH
 
 jobs:
  build:
