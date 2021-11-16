@@ -1,17 +1,17 @@
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
- workflows:
-   build-deploy:
-     jobs:
-       - azure/build-and-push-image:
-           dockerfile: # defaults to `Dockerfile`
-           path: # Defaults to working directory
-           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
-           registry-name: uffizziqa
-           repo: https://uffizziqa.azurecr.io
-           filters:
-             branches:
-               only: main # Only deploys when the commit is on the Main branchversion: 2.1
+workflows:
+  build-deploy:
+    jobs:
+      - azure/build-and-push-image:
+        dockerfile: # defaults to `Dockerfile`
+        path: # Defaults to working directory
+        login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
+        registry-name: uffizziqa
+        repo: https://uffizziqa.azurecr.io
+        filters:
+          branches:
+            only: main # Only deploys when the commit is on the Main branchversion: 2.1
 
 jobs:
  build:
