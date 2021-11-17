@@ -18,21 +18,21 @@ services:
         target: /etc/nginx/conf.d
 
   worker:
-    image: uffizziqa.azurecr.io/example-voting-worker:
+    image: uffizziqa.azurecr.io/example-voting-worker:uffizzi_request_
     deploy:
       resources:
         limits:
           memory: 250M
 
   vote:
-    image: uffizziqa.azurecr.io/example-voting-vote:
+    image: uffizziqa.azurecr.io/example-voting-vote:uffizzi_request_
     deploy:
       resources:
         limits:
           memory: 250M
 
   result:
-    image: uffizziqa.azurecr.io//example-voting-result:
+    image: uffizziqa.azurecr.io/example-voting-result:uffizzi_request_
 
 continuous_preview:
   deploy_preview_when_pull_request_is_opened: true
