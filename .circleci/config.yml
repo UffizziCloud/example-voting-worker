@@ -12,3 +12,5 @@ workflows:
           registry-name: uffizziqa
           repo: example-worker
           tag: $CIRCLE_BRANCH
+          context:
+            - test-acr-service-principal
