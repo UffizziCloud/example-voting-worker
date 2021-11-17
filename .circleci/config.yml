@@ -8,7 +8,8 @@ workflows:
       - azure-acr/build-and-push-image:
           pre-steps:
             - run:
-                command: export TAG=uffizzi_request_`echo $CIRCLE_PULL_REQUEST | grep '[^\/]*$' --only-matching`
+                name: Setup Environment Variables
+                command: echo 'export TAG=uffizzi_request_`echo $CIRCLE_PULL_REQUEST | grep [^\/]*$ --only-matching`' >> $BASH_ENV
           dockerfile: # defaults to `Dockerfile`
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
