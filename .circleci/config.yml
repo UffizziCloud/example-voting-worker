@@ -21,7 +21,7 @@ workflows:
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
-          repo: example-worker
+          repo: example-voting-worker
           tag: $TAG
           context:
             - test-acr-service-principal
@@ -35,7 +35,7 @@ workflows:
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
-          repo: example-worker
+          repo: example-voting-worker
           tag: latest
           context:
             - test-acr-service-principal
@@ -51,7 +51,7 @@ workflows:
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
-          repo: example-worker
+          repo: example-voting-worker
           tag: $CIRCLE_TAG
           context:
             - test-acr-service-principal
