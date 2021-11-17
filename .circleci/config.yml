@@ -15,6 +15,6 @@ workflows:
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
           repo: example-worker
-          tag: uffizzi_request_$TAG
+          tag: $TAG
           context:
             - test-acr-service-principal
