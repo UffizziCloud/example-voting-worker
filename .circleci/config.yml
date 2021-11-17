@@ -6,21 +6,14 @@ workflows:
   build-deploy:
     jobs:
       - azure-acr/build-and-push-image:
+          name: Build Image from Pull Request and Push to Azure Container Registry
           filters:
             branches:
               ignore: main
           pre-steps:
-            - when:
-                condition:
-                  not:
-                    equal: [ main, << pipeline.git.branch >> ]
+            - run:
                 name: Setup Environment Variables For Pull Request
                 command: echo 'export TAG=uffizzi_request_`echo $CIRCLE_PULL_REQUEST | grep [^\/]*$ --only-matching`' >> $BASH_ENV
-            - when:
-                condition:
-                  equal: [ main, << pipeline.git.branch >> ]
-                name: Setup Environment Variables For `main` Branch
-                command: echo 'export TAG=main' >> $BASH_ENV
             - run:
                 name: (Echo $TAG for Troubleshooting)
                 command: echo $TAG
@@ -30,5 +23,19 @@ workflows:
           registry-name: uffizziqa
           repo: example-worker
           tag: $TAG
+          context:
+            - test-acr-service-principal
+
+      - azure-acr/build-and-push-image:
+          name: Build Image from `main` Branch and Push to Azure Container Registry
+          filters:
+            branches:
+              only: main
+          dockerfile: # defaults to `Dockerfile`
+          path: # Defaults to working directory
+          login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
+          registry-name: uffizziqa
+          repo: example-worker
+          tag: main
           context:
             - test-acr-service-principal
