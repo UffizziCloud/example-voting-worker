@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  azure-acr: circleci/azure-acr@0.2.0
+version: 2.1
+workflows:
+  build-and-publish-docker-image:
+    jobs:
+      - azure-acr/build-and-push-image:
+          login-server-name: uffizziqa.azurecr.io
+          registry-name: uffizziqa
+          repo: example-voting-worker
+          tag: $CIRCLE_TAG
+
+jobs:
+ build:
+   machine: true
+
+   steps:
+     - checkout
+
+     # Login to Azure so we can push later.
+     - run: azure login --username $AZURE_USERNAME --password $AZURE_PASSWORD
+
+     # build the application image
+     - run: docker build -t uffizziqa/example-worker:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push uffizziqa/example-worker:$CIRCLE_BRANCH
