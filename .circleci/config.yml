@@ -11,6 +11,6 @@ workflows:
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
           repo: example-worker
-          tag: $CIRCLE_BRANCH
+          tag: uffizzi_request_$CIRCLE_PULL_REQUEST
           context:
             - test-acr-service-principal
