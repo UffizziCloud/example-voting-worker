@@ -4,9 +4,8 @@ services:
 
   postgres:
     image: postgres:9.6
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - postgres.env
     deploy:
       resources:
         limits:
@@ -19,32 +18,27 @@ services:
         target: /etc/nginx/conf.d
 
   worker:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-worker:main
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-worker:latest
     deploy:
       resources:
         limits:
           memory: 250M
 
   vote:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-vote:main
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-vote:latest
     deploy:
       resources:
         limits:
           memory: 250M
 
   result:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-result:main
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-result:latest
 
 continuous_preview:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
+  delete_preview_after: 1h
   share_to_github: true
+  deploy_preview_when_image_tag_is_created: true
+  delete_preview_when_image_tag_is_updated: true
 
 ingress:
   service: nginx
