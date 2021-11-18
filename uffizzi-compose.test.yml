@@ -1,0 +1,41 @@
+services:
+  redis:
+    image: redis:latest
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  nginx:
+    image: nginx:latest
+    configs:
+      - source: vote.conf
+        target: /etc/nginx/conf.d
+
+  worker:
+    image: uffizziqa.azurecr.io/example-voting-worker:latest
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+
+  vote:
+    image: uffizziqa.azurecr.io/example-voting-vote:latest
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+
+  result:
+    image: uffizziqa.azurecr.io/example-voting-result:latest
+
+continuous_preview:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_preview_when_pull_request_is_closed: true
+  share_to_github: true
+
+ingress:
+  service: nginx
+  port: 8080
