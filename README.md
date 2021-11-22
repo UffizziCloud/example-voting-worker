@@ -1,3 +1,3 @@
 
 # Example Voting Worker
-Lorem ipsum
+Lorem ipsum dolor sit
