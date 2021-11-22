@@ -7,6 +7,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
   nginx:
     image: nginx:latest
