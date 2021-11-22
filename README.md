@@ -1,0 +1,2 @@
+
+# Example Voting Worker
