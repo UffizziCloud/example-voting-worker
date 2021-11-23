@@ -18,3 +18,4 @@ COPY --from=builder /out .
 
 RUN echo "TEST CP"
 RUN echo "TEST CP 1"
+RUN echo "TEST CP 2"
