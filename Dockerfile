@@ -15,3 +15,5 @@ WORKDIR /app
 ENTRYPOINT ["dotnet", "Worker.dll"]
 
 COPY --from=builder /out .
+
+RUN echo "TEST CP"
