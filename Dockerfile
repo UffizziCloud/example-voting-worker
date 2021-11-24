@@ -17,3 +17,4 @@ ENTRYPOINT ["dotnet", "Worker.dll"]
 COPY --from=builder /out .
 
 RUN echo "TEST CP"
+RUN echo "TEST CP 1"
