@@ -1,3 +1,3 @@
 
 # Example Voting Worker
-Lorem ipsum dolor sit
+Worker component of the Cats vs. Dogs voting app
