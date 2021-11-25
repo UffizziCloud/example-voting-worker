@@ -27,6 +27,10 @@ services:
 
   vote:
     image: uffizziqa.azurecr.io/example-voting-vote:latest
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
   result:
     image: uffizziqa.azurecr.io/example-voting-result:latest
