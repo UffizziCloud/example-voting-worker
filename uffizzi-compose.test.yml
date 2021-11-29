@@ -34,6 +34,10 @@ services:
 
   result:
     image: uffizziqa.azurecr.io/example-voting-result:latest
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
