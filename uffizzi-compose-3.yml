@@ -4,7 +4,7 @@ services:
 
   postgres:
     image: postgres:9.6
-     environment:
+    environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     deploy:
@@ -36,10 +36,10 @@ services:
     image: uffizziqa.azurecr.io/example-voting-result:latest
 
 continuous_preview:
-  delete_preview_after: 1h
-  share_to_github: true
   deploy_preview_when_image_tag_is_created: true
-  delete_preview_when_image_tag_is_updated: true
+  tag_pattern: foo-bar-*
+
+  share_to_github: true
 
 ingress:
   service: nginx
