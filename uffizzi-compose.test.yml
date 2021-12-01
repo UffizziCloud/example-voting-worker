@@ -37,7 +37,6 @@ services:
 
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
-  tag_pattern: foo-bar-*
   share_to_github: true
 
 ingress:
