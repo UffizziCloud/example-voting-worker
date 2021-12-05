@@ -34,16 +34,17 @@ services:
       resources:
         limits:
           memory: 250M
+  
   db:
     image: postgres:9.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     deploy: 
       resources:
         limits:
           memory: 250M
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
+    
   result:
     build:
       context:  https://github.com/jpthurman/example-voting-result:main
