@@ -2,7 +2,7 @@ Version 3
 
 services:
   nginx: 
-    images: latest
+    image: latest
     configs:
       - source: vote.conf
         target: /etc/nginx/conf.d
