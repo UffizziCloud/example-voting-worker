@@ -15,16 +15,9 @@ services:
       resources:
         limits:
           memory: 250M
-          
-    command: python app.py
-    volumes:
-     - ./vote:/app
-    ports:
-      - "5000:80"
 
   redis:
     image: redis:latest
-    ports: ["6379"]
 
   worker:
     build:
@@ -49,11 +42,6 @@ services:
     build:
       context:  https://github.com/jpthurman/example-voting-result:main
       dockerfile: Dockerfile
-    volumes:
-      - ./result:/app
-    ports:
-      - "5001:80"
-      - "5858:5858"
 
 continuous_preview:
   deploy_preview_when_pull_request_is_opened: true
