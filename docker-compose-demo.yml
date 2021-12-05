@@ -1,10 +1,13 @@
 Version 3
 
 services:
+  nginx:
+    image: nginx:latest
+    
   vote:
     build:
       context:  https://github.com/jpthurman/example-voting-vote:main
-      dockerfile: 
+      dockerfile: Dockerfile
     deploy: 
       resources:
         limits:
@@ -23,13 +26,13 @@ services:
   worker:
     build:
       context:  https://github.com/jpthurman/example-voting-worker:main
-      dockerfile: 
+      dockerfile: Dockerfile
     deploy: 
       resources:
         limits:
           memory: 250M
   db:
-    image: postgres:9.4
+    image: postgres:9.6
     deploy: 
       resources:
         limits:
@@ -41,7 +44,7 @@ services:
   result:
     build:
       context:  https://github.com/jpthurman/example-voting-result:main
-      dockerfile: 
+      dockerfile: Dockerfile
     volumes:
       - ./result:/app
     ports:
