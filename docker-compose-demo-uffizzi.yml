@@ -1,6 +1,12 @@
 Version 3
 
 services:
+  nginx: 
+    images: latest
+    configs:
+      - source: vote.conf
+        target: /etc/nginx/conf.d
+  
   vote:
     build:
       context:  https://github.com/jpthurman/example-voting-vote:main
@@ -29,7 +35,7 @@ services:
         limits:
           memory: 250M
   db:
-    image: postgres:9.4
+    image: postgres:9.6
     deploy: 
       resources:
         limits:
