@@ -10,7 +10,7 @@ services:
   vote:
     build:
       context:  https://github.com/jpthurman/example-voting-vote:main
-      dockerfile: 
+      dockerfile: Dockerfile
     deploy: 
       resources:
         limits:
@@ -29,7 +29,7 @@ services:
   worker:
     build:
       context:  https://github.com/jpthurman/example-voting-worker:main
-      dockerfile: 
+      dockerfile: Dockerfile
     deploy: 
       resources:
         limits:
@@ -47,7 +47,7 @@ services:
   result:
     build:
       context:  https://github.com/jpthurman/example-voting-result:main
-      dockerfile: 
+      dockerfile: Dockerfile
     volumes:
       - ./result:/app
     ports:
