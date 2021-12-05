@@ -1,0 +1,59 @@
+Version 3
+
+services:
+  vote:
+    build:
+      context:  https://github.com/jpthurman/example-voting-vote:main
+      dockerfile: 
+    deploy: 
+      resources:
+        limits:
+          memory: 250M
+          
+    command: python app.py
+    volumes:
+     - ./vote:/app
+    ports:
+      - "5000:80"
+
+  redis:
+    image: redis:latest
+    ports: ["6379"]
+
+  worker:
+    build:
+      context:  https://github.com/jpthurman/example-voting-worker:main
+      dockerfile: 
+    deploy: 
+      resources:
+        limits:
+          memory: 250M
+  db:
+    image: postgres:9.4
+    deploy: 
+      resources:
+        limits:
+          memory: 250M
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+  result:
+    build:
+      context:  https://github.com/jpthurman/example-voting-result:main
+      dockerfile: 
+    volumes:
+      - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858"
+
+continuous_preview:
+  deploy_preview_when_pull_request_is_opened: true
+  delete_preveiew_when_pull_request_is_closed: true
+  delete_preview_after: 4h
+  share_to_github: true
+
+ingress:
+  service: nginx
+  port: 8080
