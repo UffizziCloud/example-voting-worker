@@ -3,6 +3,9 @@ version: "3"
 services:
   nginx:
     image: nginx:latest
+    configs:
+      - source: vote.conf
+        target: /etc/nginx/conf.d
     
   vote:
     build:
