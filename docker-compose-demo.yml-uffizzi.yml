@@ -1,6 +1,6 @@
 services:
   nginx: 
-    image: latest
+    image: nginx:latest
     configs:
       - source: vote.conf
         target: /etc/nginx/conf.d
