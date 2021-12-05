@@ -41,8 +41,8 @@ services:
         limits:
           memory: 250M
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
   result:
     build:
