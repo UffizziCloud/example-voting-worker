@@ -5,8 +5,8 @@ services:
   postgres:
     image: postgres:9.6
     environment:
-      POSTGRES_USER: ${VOTE_APP_POSTGRES.USER}
-      POSTGRES_PASSWORD: ${VOTE_APP_POSTGRES.PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
   nginx:
     image: nginx:latest
