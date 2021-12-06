@@ -6,7 +6,17 @@ services:
     configs:
       - source: vote.conf
         target: /etc/nginx/conf.d
-    
+  
+  redis:
+    image: redis:latest
+    ports: ["6379"]  
+
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"  
+  
   vote:
     build: ./vote
     command: python app.py
@@ -15,17 +25,7 @@ services:
     ports:
       - "5000:80"
 
-  redis:
-    image: redis:latest
-    ports: ["6379"]
-
   worker: ./worker
-  
-  db:
-    image: postgres:9.6
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
 
   result: ./result
     command: nodemon server.js
