@@ -11,7 +11,7 @@ services:
     image: redis:latest
     ports: ["6379"]  
 
-  db:
+  postgres:
     image: postgres:9.6
     environment:
       POSTGRES_USER: "postgres"
