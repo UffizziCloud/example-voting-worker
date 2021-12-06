@@ -1,4 +1,10 @@
 services:
+  nginx:
+    image: nginx:latest
+    configs:
+      - source: vote.conf
+        target: /etc/nginx/conf.d
+        
   redis:
     image: redis:latest
 
@@ -7,12 +13,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-
-  nginx:
-    image: nginx:latest
-    configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d
 
   worker:
     build:
