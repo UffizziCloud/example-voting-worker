@@ -8,14 +8,7 @@ services:
         target: /etc/nginx/conf.d
     
   vote:
-    build:
-      context:  https://github.com/jpthurman/example-voting-vote:main
-      dockerfile: Dockerfile
-    deploy: 
-      resources:
-        limits:
-          memory: 250M
-          
+    build: ./vote
     command: python app.py
     volumes:
      - ./vote:/app
@@ -26,41 +19,18 @@ services:
     image: redis:latest
     ports: ["6379"]
 
-  worker:
-    build:
-      context:  https://github.com/jpthurman/example-voting-worker:main
-      dockerfile: Dockerfile
-    deploy: 
-      resources:
-        limits:
-          memory: 250M
+  worker: ./worker
   
   db:
     image: postgres:9.6
-    deploy: 
-      resources:
-        limits:
-          memory: 250M
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
 
-  result:
-    build:
-      context:  https://github.com/jpthurman/example-voting-result:main
-      dockerfile: Dockerfile
+  result: ./result
+    command: nodemon server.js
     volumes:
       - ./result:/app
     ports:
       - "5001:80"
       - "5858:5858"
-
-continuous_preview:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-  delete_preview_after: 4h
-  share_to_github: true
-
-ingress:
-  service: nginx
-  port: 8080
