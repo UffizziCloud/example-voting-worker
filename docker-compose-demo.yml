@@ -2,35 +2,39 @@ version: "3"
 
 services:
   nginx:
-    image: nginx:latest
+    network_mode: "host"
+    image: nginx
     configs:
       - source: vote.conf
-        target: /etc/nginx/conf.d
+        target: /etc/nginx/conf.d/vote.conf
   
   redis:
-    image: redis:latest
-    ports: ["6379"]  
+    network_mode: "host"
+    image: redis
 
   postgres:
+    network_mode: "host"
     image: postgres:9.6
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"  
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres  
   
   vote:
-    build: ./vote
-    command: python app.py
-    volumes:
-     - ./vote:/app
-    ports:
-      - "5000:80"
+    network_mode: "host"
+    build: ../example-voting-vote
+    environment:
+      PORT: 8888
 
-  worker: ./worker
+  worker:
+    network_mode: "host"
+    build: .
 
-  result: ./result
-    command: nodemon server.js
-    volumes:
-      - ./result:/app
-    ports:
-      - "5001:80"
-      - "5858:5858"
+  result:
+    network_mode: "host"
+    build: ../example-voting-result
+    environment:
+      PORT: 8088
+
+configs:
+  vote.conf:
+    file: ./vote.conf
