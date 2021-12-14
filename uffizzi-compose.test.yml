@@ -13,7 +13,7 @@ services:
           memory: 250M
 
   nginx:
-    image: nginx
+    image: nginx:latest
     configs:
       - source: vote.conf
         target: /etc/nginx/conf.d
