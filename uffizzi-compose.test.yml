@@ -1,4 +1,11 @@
 services:
+
+  nginx:
+    image: nginx:latest
+    configs:
+      - source: vote-nginx-conf
+        target: /etc/nginx/conf.d/vote.conf
+        
   redis:
     image: redis:latest
 
@@ -11,12 +18,6 @@ services:
       resources:
         limits:
           memory: 250M
-
-  nginx:
-    image: nginx:latest
-    configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d
 
   worker:
     image: uffizziqa.azurecr.io/example-voting-worker:latest
@@ -34,7 +35,11 @@ services:
 
   result:
     image: uffizziqa.azurecr.io/example-voting-result:latest
-
+    
+configs:
+  vote-nginx-conf:
+    file: ./vote.conf
+    
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
   share_to_github: true
