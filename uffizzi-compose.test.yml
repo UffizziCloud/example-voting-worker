@@ -38,7 +38,7 @@ services:
     
 configs:
   vote-nginx-conf:
-    file: ./vote.conf
+    file: vote.conf
     
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
