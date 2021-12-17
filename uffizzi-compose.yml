@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx:latest
     configs:
-      - source: vote.conf
+      - source: vote-conf
         target: /etc/nginx/conf.d/vote.conf
         
   redis:
@@ -40,7 +40,7 @@ services:
       port: 8088
 
 configs: 
-  source:
+  vote-conf:
     file:  ./vote.conf
     
 continuous_preview:
