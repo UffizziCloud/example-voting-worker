@@ -3,7 +3,7 @@ services:
     image: nginx:latest
     configs:
       - source: vote.conf
-        target: /etc/nginx/conf.d
+        target: /etc/nginx/conf.d/vote.conf
         
   redis:
     image: redis:latest
@@ -37,6 +37,10 @@ services:
       context: https://github.com/UffizziCloud/example-voting-result:main
       dockerfile: Dockerfile
 
+configs: 
+  source:
+    file:  ./vote.conf
+    
 continuous_preview:
   deploy_preview_when_pull_request_is_opened: true
   delete_preview_when_pull_request_is_closed: true
