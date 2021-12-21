@@ -16,7 +16,7 @@ services:
 
   worker:
     build:
-      context: https://github.com/UffizziCloud/example-voting-worker
+      context: https://github.com/UffizziCloud/example-voting-worker#main
       dockerfile: Dockerfile
     deploy:
       resources:
@@ -25,7 +25,7 @@ services:
 
   vote:
     build:
-      context: https://github.com/UffizziCloud/example-voting-vote
+      context: https://github.com/UffizziCloud/example-voting-vote#main
       dockerfile: Dockerfile
     environment:
       PORT: 8888
@@ -36,7 +36,7 @@ services:
 
   result:
     build:
-      context: https://github.com/UffizziCloud/example-voting-result
+      context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
     environment:
       PORT: 8088
