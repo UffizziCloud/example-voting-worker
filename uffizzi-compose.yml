@@ -37,7 +37,7 @@ services:
       context: https://github.com/UffizziCloud/example-voting-result
       dockerfile: Dockerfile
     environment:
-      port: 8088
+      PORT: 8088
 
 configs: 
   vote-conf:
