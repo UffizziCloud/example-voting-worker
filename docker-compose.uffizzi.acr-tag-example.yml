@@ -44,8 +44,8 @@ configs:
     
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
-  share_to_github: true
   tag_pattern: uffizzi_request_*
+  delete_preview_after: 1h
 
 ingress:
   service: nginx
