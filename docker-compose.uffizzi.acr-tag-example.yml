@@ -32,6 +32,8 @@ services:
       resources:
         limits:
           memory: 250M
+    environment:
+      PORT: 8888
 
   result:
     image: uffizziqa.azurecr.io/example-voting-result:latest
