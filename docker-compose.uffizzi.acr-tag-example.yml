@@ -4,7 +4,7 @@ services:
     image: nginx:latest
     configs:
       - source: vote-nginx-conf
-        target: /etc/nginx/conf.d/default.conf
+        target: /etc/nginx/conf.d/vote.conf
         
   redis:
     image: redis:latest
@@ -35,14 +35,17 @@ services:
 
   result:
     image: uffizziqa.azurecr.io/example-voting-result:latest
+    environment:
+      PORT: 8088
     
 configs:
   vote-nginx-conf:
-    file: vote.conf
+    file: ./vote.conf
     
 continuous_preview:
   deploy_preview_when_image_tag_is_created: true
   share_to_github: true
+  tag_pattern: uffizzi_request_*
 
 ingress:
   service: nginx
