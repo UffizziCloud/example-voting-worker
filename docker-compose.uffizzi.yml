@@ -1,10 +1,17 @@
+
+# Uffizzi extension
+x-uffizzi:
+
+  ingress:  # Required
+    service: loadbalancer
+    port: 80
+  deploy_preview_when_pull_request_is_opened: true
+  delete_preview_when_pull_request_is_closed: true
+  share_to_github: true
+
+# Vote applicaiton
 services:
-  nginx:
-    image: nginx:latest
-    configs:
-      - source: vote.conf
-        target: /etc/nginx/conf.d
-        
+
   redis:
     image: redis:latest
 
@@ -16,16 +23,7 @@ services:
 
   worker:
     build:
-      context: https://github.com/UffizziCloud/example-voting-worker:main
-      dockerfile: Dockerfile
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-
-  vote:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-vote:main
+      context: https://github.com/UffizziCloud/example-voting-worker#main
       dockerfile: Dockerfile
     deploy:
       resources:
@@ -34,15 +32,26 @@ services:
 
   result:
     build:
-      context: https://github.com/UffizziCloud/example-voting-result:main
+      context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
 
-continuous_preview:
-  deploy_preview_when_pull_request_is_opened: true
-  delete_preview_when_pull_request_is_closed: true
-  share_to_github: true
-  delete_preview_after: 1h
+  vote:
+    build:
+      context: https://github.com/UffizziCloud/example-voting-vote#main
+      dockerfile: Dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 250M
 
-ingress:
-  service: nginx
-  port: 8080
+  loadbalancer:
+    image: nginx:latest
+    configs:
+      - source: nginx-vote-conf
+        target: /etc/nginx/conf.d/vote.conf
+
+
+# Loadbalancer configuration
+configs:
+  nginx-vote-conf:
+    file: ./vote.conf
