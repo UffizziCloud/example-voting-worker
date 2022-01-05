@@ -1,7 +1,5 @@
-
 # Uffizzi extension
 x-uffizzi:
-
   ingress:  # Required
     service: loadbalancer
     port: 80
@@ -11,7 +9,6 @@ x-uffizzi:
 
 # Vote applicaiton
 services:
-
   redis:
     image: redis:latest
 
