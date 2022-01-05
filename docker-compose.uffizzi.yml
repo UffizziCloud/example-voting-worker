@@ -1,6 +1,6 @@
 # Uffizzi extension
 x-uffizzi:
-  ingress:  # Required
+  ingress:    # required
     service: loadbalancer
     port: 80
   deploy_preview_when_pull_request_is_opened: true
@@ -19,9 +19,7 @@ services:
       POSTGRES_PASSWORD: postgres
 
   worker:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-worker#main
-      dockerfile: Dockerfile
+    build: .  # defaults to ./Dockerfile
     deploy:
       resources:
         limits:
