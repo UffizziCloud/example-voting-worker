@@ -30,8 +30,8 @@ services:
     build:
       context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
-      environment:
-        PORT: 8088
+    environment:
+      PORT: 8088
 
   vote:
     build:
@@ -41,8 +41,8 @@ services:
       resources:
         limits:
           memory: 250M
-      environment:
-        PORT: 8888
+    environment:
+      PORT: 8888
 
   loadbalancer:
     image: nginx:latest
