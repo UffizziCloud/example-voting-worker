@@ -2,7 +2,7 @@
 x-uffizzi:
   ingress:    # required
     service: loadbalancer
-    port: 80
+    port: 8080
   continuous_preview:
     deploy_preview_when_pull_request_is_opened: true
     delete_preview_when_pull_request_is_closed: true
@@ -30,6 +30,8 @@ services:
     build:
       context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
+      environment:
+        PORT: 8088
 
   vote:
     build:
@@ -39,6 +41,8 @@ services:
       resources:
         limits:
           memory: 250M
+      environment:
+        PORT: 8888
 
   loadbalancer:
     image: nginx:latest
