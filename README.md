@@ -1,6 +1,6 @@
 # Example Voting Worker
 
-This applicaiton is based off a Docker Sample, which can be found here: https://github.com/dockersamples/example-voting-app
+This is a simple Cats vs. Dogs voting applicaiton based off a Docker sample, which can be found here: https://github.com/dockersamples/example-voting-app
 
 This repository is part of a multi-service example voting application which includes:  
 - [Vote component](https://github.com/UffizziCloud/example-voting-vote)  
@@ -10,3 +10,4 @@ This repository is part of a multi-service example voting application which incl
 Additionally, this example voting app depends on:  
 - Redis cache  
 - Postgres database
+
