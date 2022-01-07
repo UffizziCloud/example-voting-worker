@@ -4,8 +4,6 @@ x-uffizzi:
     service: loadbalancer
     port: 8080
   continuous_preview:
-    deploy_preview_when_pull_request_is_opened: true
-    delete_preview_when_pull_request_is_closed: true
     share_to_github: true
 
 # Vote applicaiton
@@ -22,20 +20,24 @@ services:
   worker:
     build: .  # defaults to ./Dockerfile
     deploy:
+      x-uffizzi-auto-deploy-updates: false
       resources:
         limits:
           memory: 250M
+    x-uffizzi-continuous-preview:      
+      deploy_preview_when_pull_request_is_opened: true
+      delete_preview_when_pull_request_is_closed: true
 
   result:
     build:
       context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
-    environment:
-      PORT: 8088
+      secrets:
+        - secret_port
 
   vote:
     build:
-      context: https://github.com/UffizziCloud/example-voting-vote#main
+      context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
       dockerfile: Dockerfile
     deploy:
       resources:
@@ -55,3 +57,9 @@ services:
 configs:
   nginx-vote-conf:
     file: ./vote.conf
+    
+secrets:
+  secret_port:
+    external: true    
+    name: "PORT"
+
