@@ -21,7 +21,7 @@ services:
       - pg_password
 
   worker:
-    image: uffizziqa.azurecr.io/example-voting-worker:latest
+    build: .  # defaults to ./Dockerfile
     deploy:
       resources:
         limits:
