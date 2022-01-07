@@ -5,8 +5,8 @@ x-uffizzi:
     port: 8080
     
 x-uffizzi-continuous_preview:
-    deploy_preview_when_pull_request_is_opened: false
-    delete_preview_when_pull_request_is_closed: false
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
     share_to_github: true
 
 # Vote applicaiton
@@ -27,9 +27,6 @@ services:
       resources:
         limits:
           memory: 250M
-    x-uffizzi-continuous-preview:      
-      deploy_preview_when_pull_request_is_opened: true  # overwrites x-uffizzi policy
-      delete_preview_when_pull_request_is_closed: true  # overwrites x-uffizzi policy
 
   result:
     build:
