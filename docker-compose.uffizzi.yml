@@ -4,6 +4,8 @@ x-uffizzi:
     service: loadbalancer
     port: 8080
   continuous_preview:
+    deploy_preview_when_pull_request_is_opened: false
+    delete_preview_when_pull_request_is_closed: false
     share_to_github: true
 
 # Vote applicaiton
@@ -20,7 +22,7 @@ services:
   worker:
     build: .  # defaults to ./Dockerfile
     deploy:
-      x-uffizzi-auto-deploy-updates: false
+      x-uffizzi-auto-deploy-updates: true
       resources:
         limits:
           memory: 250M
