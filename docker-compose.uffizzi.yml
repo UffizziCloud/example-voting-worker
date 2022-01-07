@@ -30,7 +30,7 @@ services:
 
   result:
     build:
-      context: https://github.com/UffizziCloud/example-voting-result#foo-bar  # branch does not exist  
+      context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
       secrets:
         - secret_port
