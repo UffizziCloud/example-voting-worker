@@ -3,7 +3,8 @@ x-uffizzi:
   ingress:    # required
     service: loadbalancer
     port: 8080
-  continuous_preview:
+    
+x-uffizzi-continuous_preview:
     deploy_preview_when_pull_request_is_opened: false
     delete_preview_when_pull_request_is_closed: false
     share_to_github: true
