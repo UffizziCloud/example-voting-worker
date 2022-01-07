@@ -21,9 +21,8 @@ services:
       - pg_password
 
   worker:
-    build: .  # defaults to ./Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-worker:latest
     deploy:
-      x-uffizzi-auto-deploy-updates: true
       resources:
         limits:
           memory: 250M
