@@ -35,7 +35,6 @@ services:
       secrets:
         - secret_port
 
-
   vote:
     build:
       context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
@@ -44,8 +43,8 @@ services:
       resources:
         limits:
           memory: 250M
-      environment:
-        PORT: 8888
+    environment:
+      PORT: 8888
 
   loadbalancer:
     image: nginx:latest
