@@ -1,6 +1,6 @@
 # Example Voting Worker
 
-Original source: https://github.com/dockersamples/example-voting-app
+This applicaiton is based off a Docker Sample, which can be found here: https://github.com/dockersamples/example-voting-app
 
 This repository is part of a multi-service example voting application which includes:  
 - [Vote component](https://github.com/UffizziCloud/example-voting-vote)  
