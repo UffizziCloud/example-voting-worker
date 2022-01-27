@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_USER: wikijs
+  wiki:
+    image: requarks/wiki
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: wikijsrocks
+      DB_NAME: wiki
+x-uffizzi:
+  ingress:
+    service: wiki
+    port: 3000
+  continuous_preview:  #for tag-initiated preview tag must = uffizzi_request_#
+    deploy_preview_when_image_tag_is_created: true  
+    delete_preview_after: 96h 
