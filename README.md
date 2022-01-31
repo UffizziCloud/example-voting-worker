@@ -1,2 +1,2 @@
 
-# Example Voting Worker App Component
+# Example Voting Worker App
