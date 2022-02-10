@@ -9,7 +9,7 @@ x-uffizzi:
     share_to_github: true
 
 # Vote applicaiton
-services:
+services1:
   redis:
     image: redis:latest
 
