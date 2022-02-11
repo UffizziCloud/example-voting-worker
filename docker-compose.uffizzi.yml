@@ -4,6 +4,8 @@ x-uffizzi:
     service: loadbalancer
     port: 8080
   continuous_preview:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
     share_to_github: true
 
 # Vote applicaiton
@@ -13,27 +15,23 @@ services:
 
   postgres:
     image: postgres:9.6
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    secrets:
+      - pg_user
+      - pg_password
 
   worker:
     build: .  # defaults to ./Dockerfile
     deploy:
-      x-uffizzi-auto-deploy-updates: false
       resources:
         limits:
           memory: 250M
-    x-uffizzi-continuous-preview:      
-      deploy_preview_when_pull_request_is_opened: true
-      delete_preview_when_pull_request_is_closed: true
 
   result:
     build:
       context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
-      secrets:
-        - secret_port
+    environment:
+      PORT: 8088
 
   vote:
     build:
@@ -52,14 +50,16 @@ services:
       - source: nginx-vote-conf
         target: /etc/nginx/conf.d/vote.conf
 
-
 # Loadbalancer configuration
 configs:
   nginx-vote-conf:
     file: ./vote.conf
     
+# Postgres credentials
 secrets:
-  secret_port:
-    external: true    
-    name: "PORT"
-
+  pg_user:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_USER"        # i.e., value should be added in the Uffizzi Dashboard
+  pg_password:
+    external: true               # indicates value is external to this repository
+    name: "POSTGRES_PASSWORD"    # i.e., value should be added in the Uffizzi Dashboard
