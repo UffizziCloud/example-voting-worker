@@ -20,23 +20,19 @@ services:
       - pg_password
 
   worker:
-    build: .  # defaults to ./Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-worker:latest
     deploy:
       resources:
         limits:
           memory: 250M
 
   result:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-result#main
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-result:latest
     environment:
       PORT: 8088
 
   vote:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-vote  # defaults to "Default branch" as set in GitHub (usually main/master)
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-vote:latest
     deploy:
       resources:
         limits:
