@@ -28,7 +28,7 @@ services:
 
   result:
     build:
-      context: https://github.com/UffizziCloud/example-voting-result
+      context: https://github.com/UffizziCloud/example-voting-result#main
       dockerfile: Dockerfile
     environment:
       PORT: 8088
