@@ -27,9 +27,7 @@ services:
           memory: 250M
 
   result:
-    build:
-      context: https://github.com/UffizziCloud/example-voting-result
-      dockerfile: Dockerfile
+    image: uffizziqa.azurecr.io/example-voting-result:latest
     environment:
       PORT: 8088
 
