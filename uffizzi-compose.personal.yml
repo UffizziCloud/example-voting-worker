@@ -11,7 +11,7 @@ x-uffizzi:
 # Vote applicaiton
 services:
   redis:
-    image: redis:latest
+    image: redis
 
   postgres:
     image: postgres:9.6
