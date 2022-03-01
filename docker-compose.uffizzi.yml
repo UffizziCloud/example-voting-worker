@@ -45,7 +45,7 @@ services:
       PORT: 8888
 
   loadbalancer:
-    image: nginx:latest
+    image: nginx
     configs:
       - source: nginx-vote-conf
         target: /etc/nginx/conf.d/vote.conf
