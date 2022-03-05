@@ -1,6 +1,6 @@
 # Uffizzi extension
 x-uffizzi:
-  ingress:    # required
+  ingress:  # required
     service: loadbalancer
     port: 8080
   continuous_preview:
