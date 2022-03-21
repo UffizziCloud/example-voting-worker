@@ -1,2 +1,2 @@
 
-# Example Voting Worker App
+# Example Voting Worker
