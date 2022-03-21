@@ -1,4 +1,4 @@
-# Example Voting Worker
+# Example Voting Worker Component
 
 Original source: https://github.com/dockersamples/example-voting-app
 
